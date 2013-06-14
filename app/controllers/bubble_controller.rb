@@ -14,10 +14,8 @@ class BubbleController < ApplicationController
 
  	respond_to do |format|
  		if @bubble.save
-			respond_to do |format|
 			format.js {render :json =>@bubble}
 			format.html
-			end
  		else
 			format.js {render :json => {:errors => @bubble.errors}, :status => :unprocessable_entity}
 			format.html
