@@ -17,12 +17,14 @@ is the directive that implements the jquery bubblepopup
 
 == How to use:
 Form:
+=begin html
 %div{"ng-controller"=>"BubbleCtrl"}
        %form{"ng-submit"=>"saveBubble()"}
 		%input{:type=>:text,"ng-model"=>"newBubble.bubble_name", "data-name"=>"bubble_name",:validating_popup=>"popupopts"}
 		%input{:type=>:text,"ng-model"=>"newBubble.bubble_description", "data-name"=>"bubble_description",:validating_popup=>"popupopts"}
 		%input{:type=>:text,"ng-model"=>"newBubble.bubble_age", "data-name"=>"bubble_age",:validating_popup=>"popupopts"}
 		%input{:type=>:submit,:value=>:add}
+=end
 "data-name"=>"bubble_name" is the field name as in the rails model, as that is the key on which the rails returns errors
 :validating_popup=>"popupopts" this is the directive and "popupopts" is the options inside your angularjs controller for the jquery bubblepopup, 
 it can be an empty object if you do not need any specific options set.
