@@ -17,14 +17,7 @@ is the directive that implements the jquery bubblepopup
 
 == How to use:
 Form:
-=begin html
-%div{"ng-controller"=>"BubbleCtrl"}
-       %form{"ng-submit"=>"saveBubble()"}
-		%input{:type=>:text,"ng-model"=>"newBubble.bubble_name", "data-name"=>"bubble_name",:validating_popup=>"popupopts"}
-		%input{:type=>:text,"ng-model"=>"newBubble.bubble_description", "data-name"=>"bubble_description",:validating_popup=>"popupopts"}
-		%input{:type=>:text,"ng-model"=>"newBubble.bubble_age", "data-name"=>"bubble_age",:validating_popup=>"popupopts"}
-		%input{:type=>:submit,:value=>:add}
-=end
+app / views / bubble / new.html.haml
 "data-name"=>"bubble_name" is the field name as in the rails model, as that is the key on which the rails returns errors
 :validating_popup=>"popupopts" this is the directive and "popupopts" is the options inside your angularjs controller for the jquery bubblepopup, 
 it can be an empty object if you do not need any specific options set.
@@ -32,25 +25,13 @@ it can be an empty object if you do not need any specific options set.
 Rails controller:
 bubblemevalid / app / controllers / bubble_controller.rb 
 in the controller, if there are errorrs you have to return :status => :unprocessable_entity eg.
-def create
-        @bubble=Bubble.new(params[:bubble])
-
- 	respond_to do |format|
- 		if @bubble.save			
-			format.js {render :json =>@bubble}
-			format.html			
- 		else
-			format.js {render :json => {:errors => @bubble.errors}, :status => :unprocessable_entity}
-			format.html
-		end
-	end
- end
 
 == Caveat
 If you are using a js (or other) library that injects/substitutes your input field with its own then it's a problem to show the
 notification.  In one of my projects I used select2 (http://ivaynberg.github.io/select2/). To go around this problem ,
-you can see inside / app / assets / javascripts / modules / validating_bubblepopup_module.js  there is a commented piece of code
-where i checked if the element has a specific attribute, in this case a select2 specific
+you can see inside / app / assets / javascripts / modules / validating_bubblepopup_module.js  there is a commented 
+piece of code where i checked if the element has a specific attribute, in this case a select2 specific, and appended the validation
+to that element.
 
 
 
